@@ -140,20 +140,6 @@ def together(lists:list):
     return y
 
 
-def kongjian():
-
-    a = 1000000;
-    print(id(a))
-    b = 1000000;
-    print(id(b))
-    a = 1000
-    print(id(a))
-    c = 100;
-
-    print(id(c))
-    print(id(1000000))
-
-
 def bbb(s):
 
     if s == "":
@@ -174,9 +160,80 @@ def bbb(s):
             return False
 
 
+class ListNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+
+def mergeTwoLists(l1, l2):
+    """
+    :type l1: ListNode
+    :type l2: ListNode
+    :rtype: ListNode
+    """
+    if l1 is None and l2 is None:
+        return None
+    new_list = ListNode(0)
+    pre = new_list
+    while l1 is not None and l2 is not None:
+        if l1.val < l2.val:
+            pre.next = l1
+            l1 = l1.next
+        else:
+            pre.next = l2
+            l2 = l2.next
+        pre = pre.next
+    if l1 is not None:
+        pre.next = l1
+    else:
+        pre.next = l2
+    return new_list.next
+
+
+def maxs(nums):
+    if len(nums) == 1:
+        return nums[0]
+
+    x = max(nums)
+    a = len(nums)
+
+    for j in range(a):
+        y = 0
+        for i in nums:
+            i = i + y
+            y = i
+            x = max(i, x)
+        nums.pop(0)
+
+    return x
+
+    for j in range(a):
+        y = 0
+        while len(nums) > 0 and nums[0] <= 0:
+            nums.pop(0)
+
+        for i in nums:
+            i = i + y
+            y = i
+            x = max(i, x)
+        if len(nums) != 0:
+            nums.pop(0)
+        else:
+            return x
+    return x
+
+
 if __name__ == '__main__':
-    # rewen(-12080962)
-    # kongjian()
-    l = ['asdasd','asdaqedsad','asdwqe']
-    # print(together(l))
-    print(bbb('(]'))
+    # maxs([-2,1,-3,4,-1,2,1,-5,4])
+    a = []
+    for x in range(10):
+        start = time.time()
+        maxs([-2,1,-3,4,-1,2,1,-5,4])
+        end = time.time()
+        print((end-start))
+        a.append((end-start))
+
+    print(111, min(a))
+    print(min(1.1920928955078125e-05, 1.1920928955078125e-06))
+

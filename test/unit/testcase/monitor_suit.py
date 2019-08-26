@@ -90,8 +90,8 @@ class MonitorSuit(unittest.TestCase):
 
 if __name__ == '__main__':
     nameConfig = ConfigPhoneDevices()
-    nameConfig.set_option("360N7", "execution", "execution_ing")
-    print("打开", nameConfig.get_section_password("360N7", "execution"))
+    execute_phone = sys.argv[1]
+    nameConfig.set_option("EXECUTE", 'ing', execute_phone)
+    nameConfig.set_option(execute_phone, "execution", "execution_ing")
     MonitorSuit().monitor_test()
-    nameConfig.set_option("360N7", "execution", "execution_end")
-    print("关闭", nameConfig.get_section_password("360N7", "execution"))
+    nameConfig.set_option(execute_phone, "execution", "execution_end")

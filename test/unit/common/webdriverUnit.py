@@ -34,7 +34,8 @@ class WebdriverUnit(unittest.TestCase):
 
         # cls.pName = sys.argv(1)
         cls.nameConfig = ConfigPhoneDevices()
-        cls.phoneConfig = cls.nameConfig.get_section_items("HWMATE9")  # cls.pName
+        cls.phone_name = cls.nameConfig.get_section_password('EXECUTE', 'ing')
+        cls.phoneConfig = cls.nameConfig.get_section_items(cls.phone_name)  # cls.pName
         cls.desired_caps = {'platformName': 'Android',
                             'platformVersion': cls.phoneConfig[0][1],
                             'deviceName': cls.phoneConfig[1][1],
