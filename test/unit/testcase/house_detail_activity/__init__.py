@@ -1,0 +1,2 @@
+
+from .house_detail_activity import HouseDetailActivity
