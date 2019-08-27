@@ -9,12 +9,11 @@ import unittest
 import sys
 import time
 import HTMLTestRunner_cn
+
+sys.path.append("D:\\appium-android1")
+
 from testAppium.conf.getPhoneConfig import ConfigPhoneDevices
-
-sys.path.append(os.path.abspath('{bastpath}{sep}..'.format(bastpath=sys.path[0], sep=os.path.sep)))
-
 from testAppium.functional.android import send_message
-from testAppium.unit.testcase.start_activity import AA_StartAPPActivity
 from testAppium.unit.testcase.login_activity import PassWordLogin
 from testAppium.unit.testcase.homepage_activity import HomePageActivity
 from testAppium.unit.testcase.result_activity import ResultActivity

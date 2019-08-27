@@ -17,6 +17,9 @@
 
 import os
 import sys
+
+sys.path.append("D:\\appium-android1")
+
 from subprocess import Popen, PIPE
 from testAppium.conf.getPhoneConfig import ConfigPhoneDevices
 
@@ -162,6 +165,6 @@ def judge_phone_ing():
 if __name__ == '__main__':
     argument = sys.argv
     if len(argument) == 2:
-        phones = argument[1]
+        phones = eval(argument[1])
         get_phones(phones)
 
