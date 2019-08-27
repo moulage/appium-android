@@ -42,7 +42,7 @@ class LockActivity(WebdriverUnit):
         self.assertEqual(self.ele.MS_Lock_OrderDetailPayActivity, self.driver.current_activity, '申请门锁没有进入支付页面')
         self.find_element_id_and_click_wait(self.ele.actionbarwidget_back)
 
-    def test_01_18_delete_apply_for_lock(self):
+    def test_11_18_delete_apply_for_lock(self):
         """删除门锁申请"""
         lock_units.input_apply_for_lock(self)
         lock_units.delete_lock_apply(self)

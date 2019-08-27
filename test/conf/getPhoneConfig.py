@@ -10,9 +10,9 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 class ConfigPhoneDevices(object):
 
-    def __init__(self):
+    def __init__(self, config_name='configPhone.ini'):
         self.config = configparser.ConfigParser()
-        self.path = os.path.join(BASE_DIR, 'configPhone.ini')
+        self.path = os.path.join(BASE_DIR, config_name)
         self.read_config()
 
     def read_config(self):
@@ -33,11 +33,18 @@ class ConfigPhoneDevices(object):
 
     def get_section_items(self, section):
         """获取当前section下的所有键值对"""
-        return self.config.items(section)
+        try:
+            return self.config.items(section)
+        except Exception as e:
+            print("不存在相对应的section: ", e)
+            return None
 
     def get_section_password(self, section, option):
         """获取当前option对应的值"""
-        return self.config.get(section, option)
+        try:
+            return self.config.get(section, option)
+        except Exception as e:
+            return None
 
     def set_option(self, section, option, value):
         """写入option值"""
@@ -47,6 +54,22 @@ class ConfigPhoneDevices(object):
                 self.config.write(f)
         except ImportError as e:
             print("修改设备状态错误", e)
+
+    def check_config(self, *arg):
+        """检查配置文件信息是否正确"""
+        try:
+            self.read_config()
+            if len(arg) == 1:  # 判断是否有section
+                return self.config.has_section(arg[0])
+            elif len(arg) == 3:  # 判断section下 option是否正确
+                if self.config[arg[0]][arg[1]] == arg[2]:
+                    return True
+                else:
+                    return False
+            else:
+                return False
+        except Exception as e:
+            return False
 
 
 def main():

@@ -24,11 +24,11 @@ class TenantIMDetailActivity(WebdriverUnit):
         print('开始执行--房客IM--测试用例集')
         self.find_element_id_and_click_wait(self.ele.SY_HomepageNavTab, 2)
 
-    def test_08_145_080242_ReceiveMsgInBackground(self):
+    def test_09_145_080242_ReceiveMsgInBackground(self):
         """房客后台收到房东消息"""
         pass
 
-    def test_08_137_080216_TenantDetailSendMsg(self):
+    def test_09_137_080216_TenantDetailSendMsg(self):
         """房客详情页发送消息"""
         im_units.input_tenant_im_detail(self)
         im_units.send_content(self)

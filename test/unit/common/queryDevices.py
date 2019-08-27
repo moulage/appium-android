@@ -5,16 +5,19 @@
 """
 获取当前手机状态
 1：传入手机名称
-2：判断当前手机是否被标识为使用中
-3：是：直接返回--> EXECUTION_ING   否：获取手机对应的devices
-4：检查device是否连接服务器
+2：遍历判断手机是否使用
+    判断adb是否连接
+        否：3
+        是
+3：判断当前手机是否被标识为使用中
+        是：2
+        否：1
+4：返回一个数组
 """
 
 import os
 import sys
 from subprocess import Popen, PIPE
-from time import sleep
-from multiprocessing.pool import ThreadPool
 from test.conf.getPhoneConfig import ConfigPhoneDevices
 
 
@@ -28,37 +31,40 @@ devices_state = {}  # 保存查询结果,{device_name : state}
 EXECUTION = 1  # 可执行
 EXECUTION_ING = 2  # 执行中
 BREAK_OFF = 3  # 已断开
+NEED_ADD = 4  # 库存没有，需添加设备
+WRONG = 5  # 传入错误的方式
 
 
 config = ConfigPhoneDevices()
 
 
-def get_phones():
+def get_phones(names):
     """
     获取传入的手机名称转为list
     :return: 手机名称列表
     """
-    if len(sys.argv) < 2:
-        print("未传入手机设备名称，请检查后重试。。。")
-        return None
-    phones_name = sys.argv[1]
-    if ',' not in phones_name:
-        phones = [phones_name]
-    else:
-        phones = phones_name.split(',')
-    return phones
+    # if len(sys.argv) < 2:
+    #     print("未传入手机设备名称，请检查后重试。。。")
+    #     return WRONG
+    #
+    # phones_name = sys.argv[1]
 
+    phones_name = names
+    if not isinstance(phones_name, list):
+        return WRONG
 
-def get_device(phones):
-    """
-    获取配置文件中的device_name
-    :param phones: 需检查状态的电话名称
-    :return: 配置文件中对应的devices
-    """
-    all_devices_name = {}
-    for phone in phones:
-        all_devices_name[phone] = config.get_section_password(phone, 'deviceName')
-    return all_devices_name
+    all_state = get_device(phones_name)
+    all_devices = get_adb_devices()
+
+    for phone, devices in all_state.items():
+        if devices[0] in all_devices:
+            if all_state[phone][1] == 'ing':
+                devices_state[phone] = EXECUTION_ING
+            else:
+                devices_state[phone] = EXECUTION
+        else:
+            devices_state[phone] = BREAK_OFF
+    return devices_state
 
 
 def get_adb_devices():
@@ -73,6 +79,21 @@ def get_adb_devices():
         if len(t) >= 2:
             devices_name.append(t[0])
     return devices_name
+
+
+def get_device(phones: list):
+    """
+    获取配置文件中的device_name
+    :param phones: 需检查状态的电话名称
+    :return: 配置文件中对应的devices
+    """
+    all_devices_name = {}
+    for phone in phones:
+        data = []
+        data.append(config.get_section_password(phone, 'devicename'))
+        data.append(config.get_section_password(phone, 'execution'))
+        all_devices_name[phone] = data
+    return all_devices_name
 
 
 def judge_devices(devices_list: dict, adb_list: list):
@@ -139,18 +160,6 @@ def judge_phone_ing():
 
 
 if __name__ == '__main__':
-
-    phone_list = get_phones()
-
-    all_devices_dict = get_device(phone_list)
-
-    adb_device_list = get_adb_devices()
-
-    all_dicts = judge_devices(all_devices_dict, adb_device_list)
-
-    # adb_device_dicts = get_adb_count(all_dicts)
-
-    count = len(adb_device_list)
-
-    # thread_pools(count)
+    names = ['MINOTE2', 'HWMATE20', 'VIVOX27']
+    print(get_phones(names))
 

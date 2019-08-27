@@ -20,7 +20,7 @@ class GetStartActivityConfig(object):
     def read_config(self):
         """读取配置文件"""
         try:
-            self.config.read(os.path.join(BASE_DIR, 'startActivityConfig.ini'))
+            self.config.read(os.path.join(BASE_DIR, ''))
         except Exception as e:
             print(f'配置文件不正确: ', e)
             return None

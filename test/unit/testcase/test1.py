@@ -226,14 +226,8 @@ def maxs(nums):
 
 if __name__ == '__main__':
     # maxs([-2,1,-3,4,-1,2,1,-5,4])
-    a = []
-    for x in range(10):
-        start = time.time()
-        maxs([-2,1,-3,4,-1,2,1,-5,4])
-        end = time.time()
-        print((end-start))
-        a.append((end-start))
-
-    print(111, min(a))
-    print(min(1.1920928955078125e-05, 1.1920928955078125e-06))
+    a = {1: [2,3,4], 2: [2,2,2]}
+    for i in a.keys():
+        for j in a.get(i):
+            print(j)
 

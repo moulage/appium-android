@@ -26,7 +26,7 @@ class BookOrderActivity(WebdriverUnit):
         bookUnits.cancelOrder(self)
         bookUnits.input_house_detail(self)
 
-    def test_04_498_060170_TenantBookPage_JumpToWaitToConfirmPage(self):
+    def test_06_498_060170_TenantBookPage_JumpToWaitToConfirmPage(self):
         """下订单成功跳转至待确定页面"""
         bookUnits.member_pop(self)
         toolUnits.wait(self.driver, self.ele.YD_tv_luBooking_luTitle)

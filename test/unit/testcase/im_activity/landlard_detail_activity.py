@@ -29,6 +29,7 @@ class LandLardDetailActivity(WebdriverUnit):
 
     def test_18_145_080242_ReceiveMsgInBackground(self):
         """房东后台收到房客消息"""
+        pass
 
     def test_18_137_080216_LandLardDetailSendMsg(self):
         """房东详情页发送消息"""

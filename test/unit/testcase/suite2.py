@@ -5,24 +5,35 @@
 # @File:suite2.py
 
 import os
-import sys
 import unittest
+import sys
+import time
 import HTMLTestRunner_cn
-# from test.unit.common.suite_process import Suite
+from test.conf.getPhoneConfig import ConfigPhoneDevices
+
 sys.path.append(os.path.abspath('{bastpath}{sep}..'.format(bastpath=sys.path[0], sep=os.path.sep)))
 
+from test.functional.android import send_message
+from test.unit.testcase.start_activity import AA_StartAPPActivity
+from test.unit.testcase.login_activity import PassWordLogin
+from test.unit.testcase.homepage_activity import HomePageActivity
+from test.unit.testcase.result_activity import ResultActivity
+from test.unit.testcase.house_detail_activity import HouseDetailActivity
+from test.unit.testcase.book_order_activity import BookOrderActivity
+from test.unit.testcase.pay_activity import PayActivity
+from test.unit.testcase.publish_process_activity import PublishActivity
+from test.unit.testcase.comment_activity import TenantCommentDetailActivity
+from test.unit.testcase.im_activity import TenantIMDetailActivity, LandLardDetailActivity
+from test.unit.testcase.lock_activity import LockActivity
+from test.unit.testcase.clean_activity import CleanActivity
 
-# 导入用例集
-from test.unit.testcase.login_activity.password_login_activity import PassWordLogin
-from test.unit.testcase.start_activity.start_activity import AA_StartAPPActivity
-from test.unit.testcase.homepage_activity.home_page_activity import HomePageActivity
-from test.unit.testcase.result_activity.result_activity import ResultActivity
 
+cur_path = os.path.dirname(os.path.realpath(__file__))
+os.putenv("PYTHONPATH", cur_path)
 
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
 )
-
 
 """
 组件套
@@ -32,28 +43,42 @@ PATH = lambda p: os.path.abspath(
 
 class Suite2(unittest.TestCase):
 
+    cases = {1: PassWordLogin, 2: HomePageActivity, 3: ResultActivity, 4: HouseDetailActivity, 5: PayActivity,
+             6: BookOrderActivity, 7: PublishActivity, 8: TenantCommentDetailActivity, 9: TenantIMDetailActivity,
+             11: LockActivity, 12: CleanActivity, 18: LandLardDetailActivity}
+
     def run_all_test(self):
         """放置在套件里"""
-        #######################################################################
-        # 第一种添加用例类方式：
-        # suite1 = unittest.TestLoader().loadTestsFromTestCase(AA_StartAPPActivity)
-        # suite2 = unittest.TestLoader().loadTestsFromTestCase(HomePageActivity)
-        # suite = unittest.TestSuite([suite1, suite2])
-        # unittest.TextTestRunner(verbosity=2).run(suite)
-        #######################################################################
-        # 另一种添加用例套件方式：
         suite = unittest.TestSuite()
-        suite.addTests(map(AA_StartAPPActivity, ['test_01_start_app_00001']))
-        suite.addTest(PassWordLogin('testPassWordLogin'))
-        # suites.addTests(map(PassWordLogin, ['testPassWordLogin']))
-        # suites.addTests(map(HomePageActivity, ['test_02_app_79_020002_home_page_choose_domestic_hot_city_8888']))
-        #######################################################################
-        fp = open("AutoTesResult.html", 'wb')
+        chuanru = [3]
+        activity_test = ConfigPhoneDevices('ActivityConfig.ini')
+
+        for i in chuanru:
+            case = []
+            for j in activity_test.get_section_items(str(i)):
+                case.append(j[1])
+            try:
+                suite.addTests(map(self.cases[i], case))
+            except Exception as e:
+                send_message.DingTalkRobot().send_text(f'对应类不存在,请确认后重试: {e}')
+                send_message.DingTalkRobot().send_text('监控用例--启动失败')
+                return None
+
+        tm = time.strftime("%m月%d日:%H点", time.localtime(time.time()))
+        fp = open(os.path.dirname(__file__) + f'·autotest·{tm}.html', 'wb')
         runner = HTMLTestRunner_cn.HTMLTestRunner(stream=fp, title='Test Report', description=u'Result:', retry=2)
+        send_message.DingTalkRobot().send_text('监控用例--开始执行')
         runner.run(suite)
+        send_message.DingTalkRobot().send_text('监控用例--执行完毕')
         fp.close()
 
 
 if __name__ == "__main__":
+    nameConfig = ConfigPhoneDevices()
+    execute_phone = sys.argv[1]
+    nameConfig.set_option("EXECUTE", 'ing', execute_phone)
+    nameConfig.set_option(execute_phone, "execution", "ing")
     Suite2().run_all_test()
+    nameConfig.set_option(execute_phone, "execution", "wait")
+    # Suite2().run_all_test()
 
