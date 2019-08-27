@@ -41,7 +41,9 @@ class WebdriverUnit(unittest.TestCase):
                             'deviceName': cls.phoneConfig[1][1],
                             'appPackage': 'com.xiaozhu.xzdz',
                             'appActivity': '.shell.XZLauncher_XZAlias0',
-                            'noReset': 'True'
+                            'noReset': 'True',
+                            "unicodeKeyboard": "True",
+                            "resetKeyboard": "True"
                             }
 
     def start_driver(self, need_login=True, userName=ele.tenant_user_name_online, **kwargs):
