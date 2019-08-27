@@ -17,6 +17,7 @@
 
 import os
 import sys
+from time import sleep
 
 sys.path.append("D:\\appium-android1")
 
@@ -159,5 +160,5 @@ if __name__ == '__main__':
     argument = sys.argv
     if len(argument) == 2:
         phones = eval(argument[1])
-        get_phones(phones)
+        print(get_phones(phones))
 
