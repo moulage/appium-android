@@ -95,4 +95,4 @@ if __name__ == '__main__':
     nameConfig.set_option("EXECUTE", 'ing', execute_phone)
     nameConfig.set_option(execute_phone, "execution", "EXECUTION_ING")
     MonitorSuit().monitor_test()
-    nameConfig.set_option(execute_phone, "execution", "wait")
+    nameConfig.set_option(execute_phone, "execution", "EXECUTION")

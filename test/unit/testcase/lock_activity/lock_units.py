@@ -24,14 +24,26 @@ def input_apply_for_lock(driver):
     if driver.hasElement(driver.ele.WebView_TitleBar_Title):
         driver.assertEqual(driver.ele.MS_XZWebViewActivit, driver.driver.current_activity, '进入门锁介绍页失败')
         driver.find_element_desc_click_wait('申请门锁服务')
-    elif driver.get_text(driver.ele.MS_lock_manage_group_title) == '- 使用中的门锁 -':
-        driver.find_element_id_and_click_wait(driver.ele.MS_lock_manage_using_lockName)
-        driver.assertEqual(driver.ele.MS_Lock_PrivilegeManageActivity, driver.driver.current_activity, '进入开门权限设置页面失败')
-        driver.find_element_id_and_click_wait(driver.ele.actionbarwidget_back)
-        driver.find_element_id_and_click_wait(driver.ele.MS_lock_manager_passBtn)
     else:
         driver.assertEqual(driver.ele.MS_Lock_ManageActivity, driver.driver.current_activity, '进入门锁管理页面失败')
         driver.find_element_id_and_click_wait(driver.ele.MS_lock_manager_passBtn)
+
+
+def input_lock_management(driver, back=True):
+    """
+    进入门锁管理页面
+    :param driver:
+    :param back: 是否返回上一级页面
+    :return:
+    """
+    if driver.get_text(driver.ele.MS_lock_manage_group_title) == '- 使用中的门锁 -':
+        driver.find_element_id_and_click_wait(driver.ele.MS_lock_manage_using_lockName)
+        toolUnits.wait(driver.driver, driver.ele.actionbarwidget_back, 3)
+        driver.assertEqual(driver.ele.MS_Lock_PrivilegeManageActivity, driver.driver.current_activity, '进入开门权限设置页面失败')
+        if back:
+            driver.backlast(1)
+            driver.assertEqual(driver.ele.MS_Lock_ManageActivity, driver.driver.current_activity, '门锁管理页面返回列表失败')
+            driver.find_element_id_and_click_wait(driver.ele.MS_lock_manager_passBtn)
 
 
 def input_lock_management(driver):

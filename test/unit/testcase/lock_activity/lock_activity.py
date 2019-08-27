@@ -33,7 +33,7 @@ class LockActivity(WebdriverUnit):
 
     def test_11_01_input_lock_activity(self):
         """进入门锁页面正常"""
-        lock_units.input_apply_for_lock(self)
+        lock_units.input_lock_management(self)
 
     def test_11_08_apply_for_lock(self):
         """申请智能门锁"""
