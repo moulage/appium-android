@@ -61,7 +61,7 @@ def get_phones(names):
 
     for phone, devices in all_state.items():
         if devices[0] in all_devices:
-            if all_state[phone][1] == 'ing':
+            if all_state[phone][1] == 'EXECUTION_ING':
                 devices_state[phone] = EXECUTION_ING
             else:
                 devices_state[phone] = EXECUTION
@@ -127,39 +127,32 @@ def judge_phone_ing():
     return devices_state
 
 
-# def thread_pools(counts, adb_devices):
-#     """开启多线程"""
-#     pool = ThreadPool(processes=counts)
-#     pool.map(service_part, (device_name for device_name in adb_devices))
-#     pool.close()
-
-
-# def get_adb_count(all_dicts: dict):
-#     """获取链接设备的个数"""
-#     adb_dicts = {}
-#     for (k, v) in all_dicts.items():
-#         if v == 1:
-#            adb_dicts[k] = v
-#     return adb_dicts
+def get_adb_count(all_dicts: dict):
+    """获取链接设备的个数"""
+    adb_dicts = {}
+    for (k, v) in all_dicts.items():
+        if v == 1:
+           adb_dicts[k] = v
+    return adb_dicts
 
 
 # 暂时不使用，判断较为慢
-# def service_part(device_name: str) -> dict:
-#     """判断当前设备是否使用中"""
-#     result = Popen(f"adb -s {device_name} shell ps", shell=True, stdout=PIPE, stderr=PIPE).stdout.readlines()
-#     for i, j in enumerate(result):
-#         name = str(j, encoding='utf-8')
-#         # print(name.split('R ')[-1])
-#         if 'com.xiaozhu.xzdz' in name:  # 判断小猪是否在线程中，存在设置状态为 执行中
-#             devices_state[device_name] = EXECUTION_ING
-#             return devices_state
-#         sleep(10)  # 睡眠10s，再次查询
-#         if 'com.xiaozhu.xzdz' in name:
-#             devices_state[device_name] = EXECUTION_ING
-#             return devices_state
-#
-#     devices_state[device_name] = EXECUTION_ING  # 不存在设置状态为 可执行
-#     return devices_state
+def service_part(device_name: str) -> dict:
+    """判断当前设备是否使用中"""
+    result = Popen(f"adb -s {device_name} shell ps", shell=True, stdout=PIPE, stderr=PIPE).stdout.readlines()
+    for i, j in enumerate(result):
+        name = str(j, encoding='utf-8')
+        # print(name.split('R ')[-1])
+        if 'com.xiaozhu.xzdz' in name:  # 判断小猪是否在线程中，存在设置状态为 执行中
+            devices_state[device_name] = EXECUTION_ING
+            return devices_state
+        sleep(10)  # 睡眠10s，再次查询
+        if 'com.xiaozhu.xzdz' in name:
+            devices_state[device_name] = EXECUTION_ING
+            return devices_state
+
+    devices_state[device_name] = EXECUTION_ING  # 不存在设置状态为 可执行
+    return devices_state
 
 
 if __name__ == '__main__':

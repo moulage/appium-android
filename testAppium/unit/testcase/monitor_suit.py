@@ -80,7 +80,7 @@ class MonitorSuit(unittest.TestCase):
 
         suite.addTests(map(PassWordLogin, ['test_01_01_pass_word_login']))
 
-        tm = time.strftime("%m月%d日:%H点", time.localtime(time.time()))
+        tm = time.strftime("%m.%d:%H", time.localtime(time.time()))
         fp = open(os.path.dirname(__file__) + f'·autotest·{tm}.html', 'wb')
         runner = HTMLTestRunner_cn.HTMLTestRunner(stream=fp, title='Test Report', description=u'Result:', retry=2)
         send_message.DingTalkRobot().send_text('监控用例--开始执行')
