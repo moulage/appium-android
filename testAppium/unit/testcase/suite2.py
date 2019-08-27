@@ -77,8 +77,8 @@ if __name__ == "__main__":
     nameConfig = ConfigPhoneDevices()
     execute_phone = sys.argv[1]
     nameConfig.set_option("EXECUTE", 'ing', execute_phone)
-    nameConfig.set_option(execute_phone, "execution", "ing")
+    nameConfig.set_option(execute_phone, "execution", "EXECUTION_ING")
     Suite2().run_all_test()
-    nameConfig.set_option(execute_phone, "execution", "wait")
+    nameConfig.set_option(execute_phone, "execution", "EXECUTION")
     # Suite2().run_all_test()
 
