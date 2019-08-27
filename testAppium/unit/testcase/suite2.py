@@ -48,6 +48,8 @@ class Suite2(unittest.TestCase):
              11: LockActivity, 12: CleanActivity, 18: LandLardDetailActivity}
 
     def run_all_test(self):
+
+
         """放置在套件里"""
         suite = unittest.TestSuite()
         chuanru = [3]

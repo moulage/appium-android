@@ -160,8 +160,8 @@ def judge_phone_ing():
 
 
 if __name__ == '__main__':
-    argument = sys.argv()
-    if argument == 2:
+    argument = sys.argv
+    if len(argument) == 2:
         phones = argument[1]
         get_phones(phones)
 
