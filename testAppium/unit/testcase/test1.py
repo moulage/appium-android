@@ -7,8 +7,6 @@
 import os
 import sys
 import time
-from test.unit.common.webdriverUnit import WebdriverUnit
-from test.conf.getStartActivityConfig import GetStartActivityConfig
 import random
 
 PATH = lambda p: os.path.abspath(
@@ -224,10 +222,43 @@ def maxs(nums):
     return x
 
 
+def aaa(s):
+    a = ['[]', '{}', '()']
+    while True:
+        y = s
+        for j in a:
+            if j in s:
+                s = s.replace(j, '')
+        if s == '':
+            return True
+        if y == s:
+            return False
+
+import os, traceback
+
 if __name__ == '__main__':
     # maxs([-2,1,-3,4,-1,2,1,-5,4])
-    a = {1: [2,3,4], 2: [2,2,2]}
-    for i in a.keys():
-        for j in a.get(i):
-            print(j)
+    lists = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000, 'IV': 4, 'IX': 9, 'XL': 40, 'LC': 90,
+             'CD': 400, 'CM': 900}
+
+    # print(lists.get('I', lists['D']))
+    # print(lists)
+    # a = 'a'
+    # b = 'db'
+    # if b in a:
+    #     print(a.find(b))
+    #     print(1)
+    # else:
+    #     print(2)
+
+    try:
+        p = os.system('javac Test')
+        print(p)
+    except:
+        print("\nexcept:\n")
+        print(traceback.format_exc())
+
+
+
+
 

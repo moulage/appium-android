@@ -46,9 +46,7 @@ class Suite2(unittest.TestCase):
              6: BookOrderActivity, 7: PublishActivity, 8: TenantCommentDetailActivity, 9: TenantIMDetailActivity,
              11: LockActivity, 12: CleanActivity, 18: LandLardDetailActivity}
 
-    def run_all_test(self):
-
-
+    def run_all_test(self, driver):
         """放置在套件里"""
         suite = unittest.TestSuite()
         chuanru = [3]
@@ -65,12 +63,12 @@ class Suite2(unittest.TestCase):
                 send_message.DingTalkRobot().send_text('监控用例--启动失败')
                 return None
 
-        tm = time.strftime("%m月%d日:%H点", time.localtime(time.time()))
-        fp = open(os.path.dirname(__file__) + f'·autotest·{tm}.html', 'wb')
+        tm = time.strftime(f"%m.%d-%H:%M{driver}", time.localtime(time.time()))
+        fp = open(os.path.dirname(__file__) + f'AutoTest-{tm}.html', 'wb')
         runner = HTMLTestRunner_cn.HTMLTestRunner(stream=fp, title='Test Report', description=u'Result:', retry=2)
-        send_message.DingTalkRobot().send_text('监控用例--开始执行')
+        send_message.DingTalkRobot().send_text(f'{driver} --开始执行')
         runner.run(suite)
-        send_message.DingTalkRobot().send_text('监控用例--执行完毕')
+        send_message.DingTalkRobot().send_text(f'{driver} --执行完毕')
         fp.close()
 
 
@@ -79,7 +77,7 @@ if __name__ == "__main__":
     execute_phone = sys.argv[1]
     nameConfig.set_option("EXECUTE", 'ing', execute_phone)
     nameConfig.set_option(execute_phone, "execution", "EXECUTION_ING")
-    Suite2().run_all_test()
+    Suite2().run_all_test(execute_phone)
     nameConfig.set_option(execute_phone, "execution", "EXECUTION")
     # Suite2().run_all_test()
 

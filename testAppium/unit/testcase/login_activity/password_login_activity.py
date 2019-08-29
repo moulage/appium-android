@@ -21,6 +21,7 @@ PATH = lambda p: os.path.abspath(
 
 
 class PassWordLogin(WebdriverUnit):
+    """注册登录测试用例集"""
 
     def setUp(self):
         self.start_driver(need_login=False)
