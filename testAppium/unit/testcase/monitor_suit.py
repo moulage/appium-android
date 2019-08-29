@@ -38,51 +38,51 @@ PATH = lambda p: os.path.abspath(
 
 class MonitorSuit(unittest.TestCase):
 
-    def monitor_test(self):
+    def monitor_test(self, phone):
         """监控用例"""
         suite = unittest.TestSuite()
-        suite.addTests(map(HomePageActivity, ['test_02_79_020002_home_page_choose_domestic_hot_city_8888',
-                                              'test_02_66_020046_HomePage_SwitchToOtherPage',
-                                              'test_02_72_020050_SearchPage_InputCityAndSearch',
-                                              'test_02_07_home_page_input_hot_house'
-                                              ]))
+        # suite.addTests(map(HomePageActivity, ['test_02_79_020002_home_page_choose_domestic_hot_city_8888',
+        #                                       'test_02_66_020046_HomePage_SwitchToOtherPage',
+        #                                       'test_02_72_020050_SearchPage_InputCityAndSearch',
+        #                                       'test_02_07_home_page_input_hot_house'
+        #                                       ]))
+        #
+        # suite.addTests(map(PassWordLogin, ['test_01_01_pass_word_login']))
+        #
+        # suite.addTests(map(ResultActivity, ['test_03_109_030017_enter_lodge_unit_detail',
+        #                                     'test_03_256_InputChinese_SearchInList',
+        #                                     'test_03_272_030174_SearchInMap']))
+        # suite.addTests(map(HouseDetailActivity, ['test_04_241_040016_HouseDetailPage_ContactLandlord',
+        #                                          'test_04_242_040030_HouseDetailPage_ToBookPage']))
+        #
+        # suite.addTests(map(BookOrderActivity, ['test_06_498_060170_TenantBookPage_JumpToWaitToConfirmPage']))
+        #
+        # # suite.addTests(map(PayActivity, ['test_05_504_UseAlipay',
+        # #                                  'test_05_505_UseWechatPay']))
+        #
+        # suite.addTests(map(PublishActivity, ['test_07_ToRentCalendarPageAndChangePrice_8888',
+        #                                      'test_07_ToRentCalendarPageAndChangeState_8888',
+        #                                      'test_07_512_PublishSuccess_whole']))
+        #
+        # suite.addTests(map(TenantCommentDetailActivity, ['test_08_370_100303_TenantComment_WriteComment']))
+        #
+        # suite.addTests(map(TenantIMDetailActivity, ['test_09_145_080242_ReceiveMsgInBackground',
+        #                                             'test_09_137_080216_TenantDetailSendMsg']))
+        #
+        # suite.addTests(map(LandLardDetailActivity, ['test_18_137_080216_LandLardDetailSendMsg',
+        #                                             'test_18_145_080242_ReceiveMsgInBackground']))
+        #
+        # suite.addTests(map(LockActivity, ['test_11_01_input_lock_activity',
+        #                                   'test_11_08_apply_for_lock']))
+        #
+        # suite.addTests(map(CleanActivity, ['test_12_01_input_clean',
+        #                                    'test_12_02_submit_clean_order']))
 
         suite.addTests(map(PassWordLogin, ['test_01_01_pass_word_login']))
 
-        suite.addTests(map(ResultActivity, ['test_03_109_030017_enter_lodge_unit_detail',
-                                            'test_03_256_InputChinese_SearchInList',
-                                            'test_03_272_030174_SearchInMap']))
-        suite.addTests(map(HouseDetailActivity, ['test_04_241_040016_HouseDetailPage_ContactLandlord',
-                                                 'test_04_242_040030_HouseDetailPage_ToBookPage']))
-
-        suite.addTests(map(BookOrderActivity, ['test_06_498_060170_TenantBookPage_JumpToWaitToConfirmPage']))
-
-        # suite.addTests(map(PayActivity, ['test_05_504_UseAlipay',
-        #                                  'test_05_505_UseWechatPay']))
-
-        suite.addTests(map(PublishActivity, ['test_07_ToRentCalendarPageAndChangePrice_8888',
-                                             'test_07_ToRentCalendarPageAndChangeState_8888',
-                                             'test_07_512_PublishSuccess_whole']))
-
-        suite.addTests(map(TenantCommentDetailActivity, ['test_08_370_100303_TenantComment_WriteComment']))
-
-        suite.addTests(map(TenantIMDetailActivity, ['test_09_145_080242_ReceiveMsgInBackground',
-                                                    'test_09_137_080216_TenantDetailSendMsg']))
-
-        suite.addTests(map(LandLardDetailActivity, ['test_18_137_080216_LandLardDetailSendMsg',
-                                                    'test_18_145_080242_ReceiveMsgInBackground']))
-
-        suite.addTests(map(LockActivity, ['test_11_01_input_lock_activity',
-                                          'test_11_08_apply_for_lock']))
-
-        suite.addTests(map(CleanActivity, ['test_12_01_input_clean',
-                                           'test_12_02_submit_clean_order']))
-
-        suite.addTests(map(PassWordLogin, ['test_01_01_pass_word_login']))
-
-        tm = time.strftime("%m.%d:%H", time.localtime(time.time()))
+        tm = time.strftime(f"-%m.%d-%H:%M-{phone}", time.localtime(time.time()))
         fp = open(os.path.dirname(__file__) + f'·autotest·{tm}.html', 'wb')
-        runner = HTMLTestRunner_cn.HTMLTestRunner(stream=fp, title='Test Report', description=u'Result:', retry=2)
+        runner = HTMLTestRunner_cn.HTMLTestRunner(stream=fp, title='Test Report', description=u'Result:', retry=0)
         send_message.DingTalkRobot().send_text('监控用例--开始执行')
         runner.run(suite)
         send_message.DingTalkRobot().send_text('监控用例--执行完毕')
@@ -94,5 +94,5 @@ if __name__ == '__main__':
     execute_phone = sys.argv[1]
     nameConfig.set_option("EXECUTE", 'ing', execute_phone)
     nameConfig.set_option(execute_phone, "execution", "EXECUTION_ING")
-    MonitorSuit().monitor_test()
+    MonitorSuit().monitor_test(execute_phone)
     nameConfig.set_option(execute_phone, "execution", "EXECUTION")
