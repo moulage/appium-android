@@ -142,12 +142,12 @@ def add_house_photo(driver):
     driver.find_element_id_and_click_wait(driver.ele.FBXT_lu_image_add)
     toolUnits.upload_picture(driver, 1)
     driver.swipeDown(0.5, 0.9, 0.1, 5)
-    driver.find_element_id_and_click_wait(driver.ele.FBXT_lu_image_add, -3)
-    toolUnits.upload_picture(driver, 1)
-    driver.swipeDown(0.5, 0.9, 0.1, 5)
-    driver.find_element_id_and_click_wait(driver.ele.FBXT_lu_image_add, -1)
-    toolUnits.upload_picture(driver, 5)
-    driver.swipeDown(0.5, 0.9, 0.1, 5)
+    # driver.find_element_id_and_click_wait(driver.ele.FBXT_lu_image_add, -3)
+    # toolUnits.upload_picture(driver, 1)
+    # driver.swipeDown(0.5, 0.9, 0.1, 5)
+    # driver.find_element_id_and_click_wait(driver.ele.FBXT_lu_image_add, -1)
+    # toolUnits.upload_picture(driver, 5)
+    # driver.swipeDown(0.5, 0.9, 0.1, 5)
     driver.find_element_id_and_click_wait(driver.ele.actionbarwidget_back)
 
     if driver.hasElement(driver.ele.FBXT_standard_dialog_two_btn_left):

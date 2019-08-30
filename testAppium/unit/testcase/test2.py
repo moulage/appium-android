@@ -17,6 +17,8 @@ PATH = lambda p: os.path.abspath(
 注册登录测试用例集合
 """
 
+import datetime
+from testAppium.data import auto_logging
 
 class Person(object):
 
@@ -27,12 +29,20 @@ class Person(object):
 
 
 if __name__ == '__main__':
-    nameConfig = ConfigPhoneDevices()
-    execute_phone = sys.argv[1]
-    nameConfig.set_option("EXECUTE", 'ing', execute_phone)
-    nameConfig.set_option(execute_phone, "execution", "EXECUTION_ING")
-    MonitorSuit().monitor_test()
-    nameConfig.set_option(execute_phone, "execution", "EXECUTION")
+
+    def f(s) -> int:
+        a = list(s)
+        a.sort()
+        return s.count(a[0])
+
+    queries = ["bba", "abaaaaaa", "aaaaaa", "bbabbabaab", "aba", "aa", "baab", "bbbbbb", "aab", "bbabbaabb"]
+    words = ["aaabbb", "aab", "babbab", "babbbb", "b", "bbbbbbbbab", "a", "bbbbbbbbbb", "baaabbaab", "aa"]
+
+    a = {1:['ad','asd','asdf'], 5:['adf','qwe','qwe'], 4:['fre','ewr','dasf']}
+
+    b = sorted(a)
+
+    print(b)
 
 
 

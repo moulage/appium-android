@@ -34,7 +34,6 @@ class PublishActivity(WebdriverUnit):
         self.find_element_class_name_and_click('出租日历')
         self.swipeDown(0.5, 0.6, 0.4)
         today = toolUnits.calendar()
-        print(today)
         self.find_element_desc_click_wait(today)
         if '￥' not in self.get_text(self.ele.FBXT_tv_landlord_calendar_price):
             self.find_element_id_and_click_wait(today, 1)
