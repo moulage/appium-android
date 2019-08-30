@@ -12,12 +12,9 @@ PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
 )
 
-"""
-房客点评详情页测试用例集合
-"""
-
 
 class TenantCommentDetailActivity(WebdriverUnit):
+    """房客点评详情页测试用例集"""
 
     def setUp(self):
         self.start_driver()

@@ -13,12 +13,9 @@ PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
 )
 
-"""
-预订测试用例集合
-"""
-
 
 class BookOrderActivity(WebdriverUnit):
+    """预订测试用例集"""
 
     def setUp(self):
         self.start_driver()

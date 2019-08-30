@@ -15,11 +15,6 @@ PATH = lambda p: os.path.abspath(
 )
 
 
-"""
-注册登录测试用例集合
-"""
-
-
 class PassWordLogin(WebdriverUnit):
     """注册登录测试用例集"""
 

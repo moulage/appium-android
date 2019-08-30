@@ -14,12 +14,9 @@ PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
 )
 
-"""
-发布测试用例集合
-"""
-
 
 class PublishActivity(WebdriverUnit):
+    """发布测试用例集"""
 
     def setUp(self):
         self.start_driver()

@@ -17,12 +17,8 @@ PATH = lambda p: os.path.abspath(
 )
 
 
-"""
-结果页测试用例集
-"""
-
-
 class ResultActivity(WebdriverUnit):
+    """结果页测试用例"""
 
     def setUp(self):
         self.start_driver()

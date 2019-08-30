@@ -13,12 +13,9 @@ PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
 )
 
-"""
-房东IM测试用例集合
-"""
-
 
 class LandLardDetailActivity(WebdriverUnit):
+    """房东IM测试用例集"""
 
     def setUp(self):
         self.start_driver(userName=self.ele.land_lard_name_online, mobile=self.ele.land_lard_mobile_online, password=self.ele.land_lard_pass_word_online)

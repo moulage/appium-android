@@ -20,12 +20,8 @@ PATH = lambda p: os.path.abspath(
 )
 
 
-"""
-房源详情页测试用例集合
-"""
-
-
 class HouseDetailActivity(WebdriverUnit):
+    """房源详情页测试用例集"""
 
     def setUp(self):
         self.start_driver()

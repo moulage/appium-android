@@ -12,12 +12,9 @@ PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
 )
 
-"""
-支付测试用例集合
-"""
-
 
 class PayActivity(WebdriverUnit):
+    """支付测试用例集"""
 
     def setUp(self):
         self.start_driver()

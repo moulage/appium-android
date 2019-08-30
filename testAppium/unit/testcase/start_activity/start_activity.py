@@ -15,11 +15,6 @@ PATH = lambda p: os.path.abspath(
 )
 
 
-"""
-启动页面用例集
-"""
-
-
 class AA_StartAPPActivity(WebdriverUnit):
     """启动页面用例集合"""
 
@@ -41,7 +36,7 @@ class AA_StartAPPActivity(WebdriverUnit):
 
     # @unittest.skip('2')
     def test_01_start_app_00002(self):
-        """哥们给个名字"""
+        """点击跳过按钮进入登录页"""
         self.find_element_id_and_click_wait(self.ele.QD_splashActivity_passBtn)
         self.assertEqual(self.ele.DL_MainLoginActivity, self.driver.current_activity, '点击启动页跳过按钮没有进入登录页面')
 

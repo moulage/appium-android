@@ -12,12 +12,9 @@ PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
 )
 
-"""
-房客IM测试用例集合
-"""
-
 
 class TenantIMDetailActivity(WebdriverUnit):
+    """房客IM测试用例集"""
 
     def setUp(self):
         self.start_driver()

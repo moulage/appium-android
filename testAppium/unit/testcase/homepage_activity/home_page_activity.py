@@ -13,12 +13,8 @@ PATH = lambda p: os.path.abspath(
 )
 
 
-"""
-首页测试用例集
-"""
-
-
 class HomePageActivity(WebdriverUnit):
+    """首页测试用例集"""
 
     def setUp(self):
         self.start_driver()

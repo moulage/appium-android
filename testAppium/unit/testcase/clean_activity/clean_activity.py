@@ -13,12 +13,9 @@ PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
 )
 
-"""
-保洁测试用例集合
-"""
-
 
 class CleanActivity(WebdriverUnit):
+    """保洁测试用例集"""
 
     def setUp(self):
         self.start_driver(userName=self.ele.land_lard_name_online, mobile=self.ele.land_lard_mobile_online,
