@@ -25,6 +25,3 @@ venv*
 
 Pipfile.lock
 
-testAppium/unit/testcase/monitor_suit.py
-
-testAppium/unit/testcase/suite2.py
